@@ -23,6 +23,17 @@ RSpec.describe "GraphQL", type: :request do
       expect(result["data"]["pokemons"]["totalCount"]).to eq(1)
       expect(result["data"]["pokemons"]["nodes"].first["name"]).to eq("Charmander")
     end
+
+    it "filters by name, case-insensitively" do
+      result = post_graphql(<<~GQL, variables: { name: "char" })
+        query($name: String) {
+          pokemons(name: $name) { totalCount nodes { name } }
+        }
+      GQL
+
+      expect(result["data"]["pokemons"]["totalCount"]).to eq(1)
+      expect(result["data"]["pokemons"]["nodes"].first["name"]).to eq("Charmander")
+    end
   end
 
   describe "types query" do

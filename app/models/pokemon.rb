@@ -13,4 +13,5 @@ class Pokemon < ApplicationRecord
   validates :image_url, presence: true
 
   scope :of_type, ->(type_id) { joins(:pokemon_types).where(pokemon_types: { type_id: type_id }) }
+  scope :matching_name, ->(name) { where("pokemons.name ILIKE ?", "%#{sanitize_sql_like(name)}%") }
 end

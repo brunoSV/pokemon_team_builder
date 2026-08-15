@@ -21,11 +21,13 @@ module Types
     field :pokemons, Types::PokemonPageType, null: false do
       argument :page, Integer, required: false
       argument :type_id, ID, required: false
+      argument :name, String, required: false
     end
 
-    def pokemons(page: 1, type_id: nil)
+    def pokemons(page: 1, type_id: nil, name: nil)
       scope = Pokemon.includes(:types, :attacks).order(:national_dex_number)
       scope = scope.of_type(type_id) if type_id.present?
+      scope = scope.matching_name(name) if name.present?
 
       pagy = Pagy.new(count: scope.count, page: page || 1, limit: 20)
       {

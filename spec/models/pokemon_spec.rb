@@ -37,4 +37,14 @@ RSpec.describe Pokemon, type: :model do
       expect(Pokemon.of_type(fire.id)).to contain_exactly(charmander)
     end
   end
+
+  describe ".matching_name" do
+    it "matches case-insensitively and partially" do
+      charmander = Pokemon.create!(name: "Charmander", national_dex_number: 4, generation: 1, image_url: "x")
+      Pokemon.create!(name: "Squirtle", national_dex_number: 7, generation: 1, image_url: "x")
+
+      expect(Pokemon.matching_name("char")).to contain_exactly(charmander)
+      expect(Pokemon.matching_name("CHAR")).to contain_exactly(charmander)
+    end
+  end
 end
