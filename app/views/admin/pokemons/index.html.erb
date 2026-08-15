@@ -1,24 +1,26 @@
 <h1>Pokemon</h1>
 
-<%= link_to "New Pokemon", new_admin_pokemon_path %>
+<%= link_to "New Pokemon", new_admin_pokemon_path, class: "btn btn-primary" %>
 
-<table>
-  <thead>
-    <tr><th>#</th><th>Name</th><th>Gen</th><th>Types</th><th>Attacks</th><th></th></tr>
-  </thead>
-  <tbody>
-    <% @pokemons.each do |pokemon| %>
-      <tr>
-        <td><%= pokemon.national_dex_number %></td>
-        <td><%= pokemon.name %></td>
-        <td><%= pokemon.generation %></td>
-        <td><%= pokemon.types.map(&:name).join(", ") %></td>
-        <td><%= pokemon.attacks.map(&:name).join(", ") %></td>
-        <td>
-          <%= link_to "Edit", edit_admin_pokemon_path(pokemon) %>
-          <%= button_to "Delete", admin_pokemon_path(pokemon), method: :delete, form: { style: "display:inline" } %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr><th>#</th><th>Name</th><th>Gen</th><th>Types</th><th>Attacks</th><th></th></tr>
+    </thead>
+    <tbody>
+      <% @pokemons.each do |pokemon| %>
+        <tr>
+          <td><%= pokemon.national_dex_number %></td>
+          <td><%= pokemon.name %></td>
+          <td><%= pokemon.generation %></td>
+          <td><%= pokemon.types.map(&:name).join(", ") %></td>
+          <td><%= pokemon.attacks.map(&:name).join(", ") %></td>
+          <td>
+            <%= link_to "Edit", edit_admin_pokemon_path(pokemon), class: "btn" %>
+            <%= button_to "Delete", admin_pokemon_path(pokemon), method: :delete, class: "btn btn-danger", form: { style: "display:inline" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

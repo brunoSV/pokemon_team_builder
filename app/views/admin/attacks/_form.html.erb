@@ -1,7 +1,7 @@
-<%= form_with model: attack, url: url, method: method do |f| %>
+<%= form_with model: attack, url: url, method: method, class: "admin-form" do |f| %>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name, required: true %>
   </div>
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>

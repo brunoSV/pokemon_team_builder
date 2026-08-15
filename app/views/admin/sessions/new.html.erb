@@ -1,6 +1,6 @@
 <h1>Admin log in</h1>
 
-<%= form_with url: admin_user_session_path, method: :post do %>
+<%= form_with url: admin_user_session_path, method: :post, class: "admin-form" do %>
   <div>
     <label for="admin_user_email">Email</label>
     <input type="email" name="admin_user[email]" id="admin_user_email" required>
@@ -9,5 +9,5 @@
     <label for="admin_user_password">Password</label>
     <input type="password" name="admin_user[password]" id="admin_user_password" required>
   </div>
-  <button type="submit">Log in</button>
+  <button type="submit" class="btn btn-primary">Log in</button>
 <% end %>

@@ -4,7 +4,7 @@
   attack_ids_by_slot = pokemon.pokemon_attacks.index_by(&:slot).transform_values(&:attack_id)
 %>
 
-<%= form_with model: pokemon, url: url, method: method do |f| %>
+<%= form_with model: pokemon, url: url, method: method, class: "admin-form" do |f| %>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name, required: true %>
@@ -53,5 +53,5 @@
     </div>
   <% end %>
 
-  <%= f.submit %>
+  <%= f.submit class: "btn btn-primary" %>
 <% end %>
