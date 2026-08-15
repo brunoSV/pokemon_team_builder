@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "graphql"
+  end
+
+  post "/graphql", to: "graphql#execute"
   devise_for :admin_users, path: "admin", path_names: { sign_in: "login", sign_out: "logout" },
              skip: [ :registrations, :passwords, :confirmations, :unlocks ],
              controllers: { sessions: "admin/sessions" }
-  # sessions/registrations replaced by JWT-based controllers under /api/v1 (Checkpoint B)
-  devise_for :trainers, skip: [ :sessions, :registrations ]
+  devise_for :trainers, path: "api/v1/trainers", path_names: { sign_in: "login", sign_out: "logout" },
+             skip: [ :passwords, :confirmations, :unlocks ],
+             controllers: { sessions: "api/v1/sessions", registrations: "api/v1/registrations" }
 
   # config.api_only excludes :new/:edit from `resources` by default (API apps
   # don't serve HTML forms) — the admin panel needs them, so list actions explicitly.

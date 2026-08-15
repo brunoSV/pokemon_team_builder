@@ -1,8 +1,7 @@
 class Trainer < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :registerable, :validatable,
+         :jwt_authenticatable, jwt_revocation_strategy: self
+  include Devise::JWT::RevocationStrategies::JTIMatcher
 
   has_many :team_memberships, -> { order(:slot) }, dependent: :destroy
   has_many :pokemons, through: :team_memberships
