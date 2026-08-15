@@ -1,0 +1,57 @@
+<%
+  primary_type_id = pokemon.pokemon_types.find { |pt| pt.slot == 1 }&.type_id
+  secondary_type_id = pokemon.pokemon_types.find { |pt| pt.slot == 2 }&.type_id
+  attack_ids_by_slot = pokemon.pokemon_attacks.index_by(&:slot).transform_values(&:attack_id)
+%>
+
+<%= form_with model: pokemon, url: url, method: method do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true %>
+  </div>
+  <div>
+    <%= f.label :national_dex_number %>
+    <%= f.number_field :national_dex_number, required: true %>
+  </div>
+  <div>
+    <%= f.label :generation %>
+    <%= f.select :generation, [1, 2], prompt: true %>
+  </div>
+  <div>
+    <%= f.label :image_url %>
+    <%= f.text_field :image_url, required: true %>
+  </div>
+
+  <div>
+    <label for="pokemon_primary_type_id">Primary type</label>
+    <select name="pokemon[primary_type_id]" id="pokemon_primary_type_id">
+      <option value="">-- select --</option>
+      <% @types.each do |type| %>
+        <option value="<%= type.id %>" <%= "selected" if type.id == primary_type_id %>><%= type.name %></option>
+      <% end %>
+    </select>
+  </div>
+  <div>
+    <label for="pokemon_secondary_type_id">Secondary type (optional)</label>
+    <select name="pokemon[secondary_type_id]" id="pokemon_secondary_type_id">
+      <option value="">-- none --</option>
+      <% @types.each do |type| %>
+        <option value="<%= type.id %>" <%= "selected" if type.id == secondary_type_id %>><%= type.name %></option>
+      <% end %>
+    </select>
+  </div>
+
+  <% (1..4).each do |slot| %>
+    <div>
+      <label for="pokemon_attack_id_<%= slot %>">Attack <%= slot %><%= " (optional)" if slot > 1 %></label>
+      <select name="pokemon[attack_id_<%= slot %>]" id="pokemon_attack_id_<%= slot %>">
+        <option value="">-- none --</option>
+        <% @attacks.each do |attack| %>
+          <option value="<%= attack.id %>" <%= "selected" if attack.id == attack_ids_by_slot[slot] %>><%= attack.name %></option>
+        <% end %>
+      </select>
+    </div>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>

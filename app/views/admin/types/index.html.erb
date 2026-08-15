@@ -1,0 +1,20 @@
+<h1>Types</h1>
+
+<%= link_to "New type", new_admin_type_path %>
+
+<table>
+  <thead>
+    <tr><th>Name</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @types.each do |type| %>
+      <tr>
+        <td><%= type.name %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_type_path(type) %>
+          <%= button_to "Delete", admin_type_path(type), method: :delete, form: { style: "display:inline" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

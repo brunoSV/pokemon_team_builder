@@ -1,0 +1,20 @@
+<h1>Attacks</h1>
+
+<%= link_to "New attack", new_admin_attack_path %>
+
+<table>
+  <thead>
+    <tr><th>Name</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @attacks.each do |attack| %>
+      <tr>
+        <td><%= attack.name %></td>
+        <td>
+          <%= link_to "Edit", edit_admin_attack_path(attack) %>
+          <%= button_to "Delete", admin_attack_path(attack), method: :delete, form: { style: "display:inline" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

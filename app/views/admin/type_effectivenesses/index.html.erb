@@ -1,0 +1,22 @@
+<h1>Type effectiveness</h1>
+
+<%= link_to "New type effectiveness", new_admin_type_effectiveness_path %>
+
+<table>
+  <thead>
+    <tr><th>Attacking</th><th>Defending</th><th>Multiplier</th><th></th></tr>
+  </thead>
+  <tbody>
+    <% @type_effectivenesses.each do |te| %>
+      <tr>
+        <td><%= te.attacking_type.name %></td>
+        <td><%= te.defending_type.name %></td>
+        <td><%= te.multiplier %>x</td>
+        <td>
+          <%= link_to "Edit", edit_admin_type_effectiveness_path(te) %>
+          <%= button_to "Delete", admin_type_effectiveness_path(te), method: :delete, form: { style: "display:inline" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

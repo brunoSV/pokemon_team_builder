@@ -40,5 +40,11 @@ module PokemonTeamBuilder
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
+
+    # The /admin panel is server-rendered with session-based Devise auth, so it
+    # needs the session/cookie/flash middleware that API-only mode strips out.
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::Flash
   end
 end

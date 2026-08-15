@@ -1,0 +1,15 @@
+<%= form_with model: type_effectiveness, url: url, method: method do |f| %>
+  <div>
+    <%= f.label :attacking_type_id, "Attacking type" %>
+    <%= f.collection_select :attacking_type_id, @types, :id, :name, { prompt: true } %>
+  </div>
+  <div>
+    <%= f.label :defending_type_id, "Defending type" %>
+    <%= f.collection_select :defending_type_id, @types, :id, :name, { prompt: true } %>
+  </div>
+  <div>
+    <%= f.label :multiplier %>
+    <%= f.select :multiplier, [["0x (no effect)", 0], ["0.5x (not very effective)", 0.5], ["1x (normal)", 1], ["2x (super effective)", 2]], prompt: true %>
+  </div>
+  <%= f.submit %>
+<% end %>

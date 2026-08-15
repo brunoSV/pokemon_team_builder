@@ -1,0 +1,7 @@
+<%= form_with model: type, url: url, method: method do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name, required: true %>
+  </div>
+  <%= f.submit %>
+<% end %>
