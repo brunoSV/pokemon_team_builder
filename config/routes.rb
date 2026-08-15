@@ -13,14 +13,14 @@ Rails.application.routes.draw do
 
   # config.api_only excludes :new/:edit from `resources` by default (API apps
   # don't serve HTML forms) — the admin panel needs them, so list actions explicitly.
-  ADMIN_CRUD_ACTIONS = [ :index, :new, :create, :edit, :update, :destroy ]
+  admin_crud_actions = [ :index, :new, :create, :edit, :update, :destroy ]
 
   namespace :admin do
     root to: "pokemons#index"
-    resources :pokemons, only: ADMIN_CRUD_ACTIONS
-    resources :types, only: ADMIN_CRUD_ACTIONS
-    resources :attacks, only: ADMIN_CRUD_ACTIONS
-    resources :type_effectivenesses, only: ADMIN_CRUD_ACTIONS
+    resources :pokemons, only: admin_crud_actions
+    resources :types, only: admin_crud_actions
+    resources :attacks, only: admin_crud_actions
+    resources :type_effectivenesses, only: admin_crud_actions
   end
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

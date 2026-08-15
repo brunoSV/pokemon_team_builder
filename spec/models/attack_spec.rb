@@ -1,5 +1,14 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Attack, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "validations" do
+    it "requires a name" do
+      expect(Attack.new(name: nil)).not_to be_valid
+    end
+
+    it "requires a unique name" do
+      Attack.create!(name: "Tackle")
+      expect(Attack.new(name: "Tackle")).not_to be_valid
+    end
+  end
 end
