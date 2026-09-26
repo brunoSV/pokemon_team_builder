@@ -53,7 +53,7 @@ gem "rspec-rails", "~> 8.0", groups: [:development, :test]
 
 gem "devise", "~> 5.0"
 gem "devise-jwt", "~> 0.12"
-gem "graphql", "~> 2.5"
+gem "graphql", "~> 2.6"
 gem "pagy", "~> 9.3"
 
 group :development do
